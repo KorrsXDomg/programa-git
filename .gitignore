@@ -18,3 +18,64 @@ public class ConexionDB {
         return conexion;
     }
 }
+public void insertarProducto(Producto producto) {
+    String sql = "INSERT INTO productos (nombre, precio, cantidad) VALUES (?, ?, ?)";
+    try (Connection conexion = new ConexionDB().conectar();
+         PreparedStatement stmt = conexion.prepareStatement(sql)) {
+        
+        stmt.setString(1, producto.getNombre());
+        stmt.setDouble(2, producto.getPrecio());
+        stmt.setInt(3, producto.getCantidad());
+        stmt.executeUpdate();
+        System.out.println("Producto insertado correctamente");
+    } catch (SQLException e) {
+        System.out.println("Error al insertar producto: " + e.getMessage());
+    }
+}
+public List<Producto> obtenerProductos() {
+    List<Producto> productos = new ArrayList<>();
+    String sql = "SELECT * FROM productos";
+    try (Connection conexion = new ConexionDB().conectar();
+         Statement stmt = conexion.createStatement();
+         ResultSet rs = stmt.executeQuery(sql)) {
+        
+        while (rs.next()) {
+            Producto producto = new Producto();
+            producto.setId(rs.getInt("id"));
+            producto.setNombre(rs.getString("nombre"));
+            producto.setPrecio(rs.getDouble("precio"));
+            producto.setCantidad(rs.getInt("cantidad"));
+            productos.add(producto);
+        }
+    } catch (SQLException e) {
+        System.out.println("Error al obtener productos: " + e.getMessage());
+    }
+    return productos;
+}
+public void actualizarProducto(Producto producto) {
+    String sql = "UPDATE productos SET nombre = ?, precio = ?, cantidad = ? WHERE id = ?";
+    try (Connection conexion = new ConexionDB().conectar();
+         PreparedStatement stmt = conexion.prepareStatement(sql)) {
+        
+        stmt.setString(1, producto.getNombre());
+        stmt.setDouble(2, producto.getPrecio());
+        stmt.setInt(3, producto.getCantidad());
+        stmt.setInt(4, producto.getId());
+        stmt.executeUpdate();
+        System.out.println("Producto actualizado correctamente");
+    } catch (SQLException e) {
+        System.out.println("Error al actualizar producto: " + e.getMessage());
+    }
+}
+public void eliminarProducto(int id) {
+    String sql = "DELETE FROM productos WHERE id = ?";
+    try (Connection conexion = new ConexionDB().conectar();
+         PreparedStatement stmt = conexion.prepareStatement(sql)) {
+        
+        stmt.setInt(1, id);
+        stmt.executeUpdate();
+        System.out.println("Producto eliminado correctamente");
+    } catch (SQLException e) {
+        System.out.println("Error al eliminar producto: " + e.getMessage());
+    }
+}
