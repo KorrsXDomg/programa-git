@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gestión - Front-end</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; display: flex; }
+        .sidebar { width: 200px; background: #2c3e50; color: white; height: 100vh; padding: 20px; }
+        .sidebar a { color: white; display: block; margin: 15px 0; text-decoration: none; }
+        .content { flex: 1; padding: 20px; }
+        .card { border: 1px solid #ddd; padding: 15px; margin: 10px; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <h3>Menú</h3>
+        <a href="#" onclick="mostrar('dashboard')">Dashboard</a>
+        <a href="#" onclick="mostrar('clientes')">Clientes</a>
+        <a href="#" onclick="mostrar('productos')">Productos</a>
+        <a href="#" onclick="mostrar('pedidos')">Pedidos</a>
+    </div>
+    <div class="content" id="contenido">
+        <h2>Dashboard</h2>
+        <div class="card">Bienvenido al sistema de gestión</div>
+    </div>
+
+    <script>
+        function mostrar(seccion) {
+            const cont = document.getElementById('contenido');
+            if (seccion === 'dashboard') {
+                cont.innerHTML = '<h2>Dashboard</h2><div class="card">Resumen del sistema</div>';
+            } else if (seccion === 'clientes') {
+                cont.innerHTML = '<h2>Clientes</h2><div class="card">Listado de clientes</div><button>Nuevo Cliente</button>';
+            } else if (seccion === 'productos') {
+                cont.innerHTML = '<h2>Productos</h2><div class="card">Catálogo de productos</div>';
+            } else if (seccion === 'pedidos') {
+                cont.innerHTML = '<h2>Pedidos</h2><div class="card">Tabla de pedidos</div>';
+            }
+        }
+    </script>
+</body>
+</html>
