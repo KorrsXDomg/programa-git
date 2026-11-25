@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario Cliente</title>
+</head>
+<body>
+    <h2>Registro de Cliente</h2>
+
+    <h3>Formulario con método GET</h3>
+    <form action="cliente" method="get">
+        <label>Nombre: <input type="text" name="nombre" required></label><br><br>
+        <button type="submit">Enviar GET</button>
+    </form>
+
+    <hr>
+
+    <h3>Formulario con método POST</h3>
+    <form action="cliente" method="post">
+        <label>Nombre: <input type="text" name="nombre" required></label><br>
+        <label>Apellido: <input type="text" name="apellido" required></label><br>
+        <label>Email: <input type="email" name="email" required></label><br><br>
+        <button type="submit">Enviar POST</button>
+    </form>
+</body>
+</html>
